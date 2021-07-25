@@ -68,11 +68,11 @@ BUILTIN(CallSitePrototypeGetFileName) {
 BUILTIN(CallSitePrototypeGetFunction) {
   HandleScope scope(isolate);
   CHECK_CALLSITE(frame, "getFunction");
-  if (frame->IsStrict() ||
-      (frame->function().IsJSFunction() &&
-       JSFunction::cast(frame->function()).shared().is_toplevel())) {
-    return ReadOnlyRoots(isolate).undefined_value();
-  }
+  // if (frame->IsStrict() ||
+  //     (frame->function().IsJSFunction() &&
+  //      JSFunction::cast(frame->function()).shared().is_toplevel())) {
+  //   return ReadOnlyRoots(isolate).undefined_value();
+  // }
   isolate->CountUsage(v8::Isolate::kCallSiteAPIGetFunctionSloppyCall);
   return frame->function();
 }
@@ -119,7 +119,7 @@ BUILTIN(CallSitePrototypeGetScriptNameOrSourceURL) {
 BUILTIN(CallSitePrototypeGetThis) {
   HandleScope scope(isolate);
   CHECK_CALLSITE(frame, "getThis");
-  if (frame->IsStrict()) return ReadOnlyRoots(isolate).undefined_value();
+  // if (frame->IsStrict()) return ReadOnlyRoots(isolate).undefined_value();
   isolate->CountUsage(v8::Isolate::kCallSiteAPIGetThisSloppyCall);
 #if V8_ENABLE_WEBASSEMBLY
   if (frame->IsAsmJsWasm()) {
